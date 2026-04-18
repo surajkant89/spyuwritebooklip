@@ -2,7 +2,7 @@
   "name": "SpyuWrite",
   "short_name": "SpyuWrite",
   "description": "Share your thoughts, stories, or ideas...",
-  "start_url": "booklip.html",
+  "start_url": "https://spyuwrite.netlify.app/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#3b82f6",
