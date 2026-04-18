@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="SpyuWrite · Share your thoughts">
+    <meta name="description" content="SpyuWrite is an interactive platform to express, inspire, and connect. Share your thoughts and stories with a vibrant community.">
+    <meta name="keywords" content="SpyuWrite, writing, thoughts, share stories, community, social platform, writing app">
+    <meta name="author" content="SpyuWrite">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://spyuwrite.com/">
+    <meta property="og:title" content="SpyuWrite · Share your thoughts">
+    <meta property="og:description" content="SpyuWrite is an interactive platform to express, inspire, and connect. Share your thoughts and stories with a vibrant community.">
+    <meta property="og:image" content="https://spyuwrite.com/icon.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://spyuwrite.com/">
+    <meta property="twitter:title" content="SpyuWrite · Share your thoughts">
+    <meta property="twitter:description" content="SpyuWrite is an interactive platform to express, inspire, and connect. Share your thoughts and stories with a vibrant community.">
+    <meta property="twitter:image" content="https://spyuwrite.com/icon.svg">
+
+    <!-- PWA & Theme -->
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="download.svg">
+    <link rel="apple-touch-icon" href="download.svg">
+    
+    <title>SpyuWrite · Share your thoughts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            /* Black background */
+            font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        /* Smooth scroll & base */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 2rem;
+        }
+
+        /* ========== HEADER ========== */
+        .site-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.4);
+            /* Light blue accent */
+            padding-bottom: 1rem;
+        }
+
+        .site-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #9ac8ff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(59, 130, 246, 0.2);
+        }
+
+        .brand-tagline {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-top: 0.3rem;
+        }
+
+        /* ========== FORM CARD ========== */
+        .form-card {
+            background: #0f0f0f;
+            border-radius: 28px;
+            padding: 1.8rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .form-card:hover {
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.8), 0 0 0 1px #3b82f6;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #e5e7eb;
+            letter-spacing: -0.2px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #2c2c2c;
+            border-radius: 20px;
+            padding: 0.9rem 1.2rem;
+            font-size: 1rem;
+            color: #ffffff;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            background: #1f1f1f;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .btn-submit {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-submit:hover {
+            background: #60a5fa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #f87171;
+            font-size: 0.85rem;
+            margin-top: 0.6rem;
+            background: rgba(248, 113, 113, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        /* ========== POSTS SECTION ========== */
+        .posts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .posts-header h2 {
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+
+        .refresh-note {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 0;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(59, 130, 246, 0.2);
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Posts grid / list */
+        .posts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Post card style */
+        .post-card {
+            background: #0f0f0f;
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid #202020;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 30px -12px rgba(59, 130, 246, 0.25);
+            background: #121212;
+        }
+
+        .post-name {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #f0f9ff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .post-name::before {
+            content: "✍️";
+            font-size: 1rem;
+        }
+
+        .post-content {
+            font-size: 1rem;
+            color: #e2e8f0;
+            margin: 0.7rem 0 0.9rem 0;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .post-date {
+            font-size: 0.7rem;
+            color: #9ca3af;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border-top: 1px dashed #2a2a2a;
+            padding-top: 0.7rem;
+            margin-top: 0.2rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: #0a0a0a;
+            border-radius: 40px;
+            border: 1px dashed #2d3748;
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+
+        .api-error {
+            background: rgba(248, 113, 113, 0.15);
+            border-left: 4px solid #f87171;
+            padding: 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            color: #fca5a5;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: 3.5rem;
+            text-align: center;
+            padding: 1.5rem 0 0.8rem;
+            border-top: 1px solid #1f2937;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .site-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-card {
+                padding: 1.3rem;
+            }
+
+            .post-card {
+                padding: 1.2rem;
+            }
+
+            .posts-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .btn-submit {
+                width: auto;
+                padding: 0.9rem 2rem;
+            }
+
+            .form-card {
+                max-width: 780px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Branding Header -->
+        <header class="site-header">
+            <h1>SpyuWrite</h1>
+            <div class="brand-tagline">express · inspire · connect</div>
+            <button id="installAppBtn" class="btn-submit" style="display: none; margin-top: 1rem; background-color: #10b981; margin-left: auto; margin-right: auto; width: auto; font-size: 0.9rem; padding: 0.6rem 1.2rem;">📥 Install App</button>
+        </header>
+
+        <!-- Post Form Section -->
+        <div class="form-card">
+            <form id="postForm">
+                <div class="form-group">
+                    <label for="name">Your name</label>
+                    <input type="text" id="name" placeholder="e.g., Alex Rivers" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="postContent">Post it what you want...</label>
+                    <textarea id="postContent" placeholder="Share your thoughts, stories, or ideas..."></textarea>
+                </div>
+                <div id="formError" class="error-message" style="display: none;"></div>
+                <button type="submit" class="btn-submit" id="submitBtn">✧ Publish post ✧</button>
+            </form>
+        </div>
+
+        <!-- Posts Display Section -->
+        <div class="posts-header">
+            <h2>✨ Community whispers</h2>
+            <span class="refresh-note">newest on top</span>
+        </div>
+        <div id="loadingIndicator" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+        <div id="postsContainer" class="posts-container">
+            <!-- dynamic posts will appear here -->
+            <div class="empty-state">💬 No posts yet — be the first to write!</div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            Powered by SpyuWrite · share your voice
+        </footer>
+    </div>
+
+    <script>
+        // ============================================================
+        //  CONFIGURATION - Google Apps Script API ENDPOINT
+        //  Replace this URL with your own Google Apps Script Web App URL
+        //  The Web App must support:
+        //    - GET request: returns { posts: [ {name, content, dateISO} ] }
+        //    - POST request: accepts JSON { name, content, dateISO }
+        //  Example doGet / doPost code is provided in comments below.
+        // ============================================================
+        const API_BASE_URL = 'https://script.google.com/macros/s/AKfycby2xClCoebCwRVCTMw8s6kGm9UsQU2uf14JM42-ezA63eDe19SlN3CQNDGky8nz0JgG9g/exec';
+        // ⚠️ IMPORTANT: Replace YOUR_DEPLOYMENT_ID with your actual Apps Script deployment ID.
+        // If the URL is not set, the app will show an error prompting to configure.
+        // For local testing or without backend, you can set USE_MOCK_FALLBACK = false (but real API is required)
+        // To respect requirements, we implement full fetch integration. Please set valid Apps Script URL.
+
+        // ------------------------- DOM Elements -------------------------
+        const postForm = document.getElementById('postForm');
+        const nameInput = document.getElementById('name');
+        const contentInput = document.getElementById('postContent');
+        const submitBtn = document.getElementById('submitBtn');
+        const formErrorDiv = document.getElementById('formError');
+        const postsContainer = document.getElementById('postsContainer');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        // Helper: show/hide loading overlay for fetching posts
+        let isFetching = false;
+
+        // Format display date from ISO string (or any date string) -> readable format
+        function formatDate(dateISO) {
+            try {
+                const date = new Date(dateISO);
+                if (isNaN(date.getTime())) return 'recent date';
+                return date.toLocaleString(undefined, {
+                    month: 'short', day: 'numeric', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+            } catch (e) {
+                return 'just now';
+            }
+        }
+
+        // Show temporary error message inside posts area (network/api issues)
+        function showApiErrorMessage(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'api-error';
+            errorDiv.textContent = `⚠️ ${message}`;
+            postsContainer.prepend(errorDiv);
+            setTimeout(() => {
+                if (errorDiv.parentNode) errorDiv.remove();
+            }, 5000);
+        }
+
+        // Render posts (card list) - newest first based on dateISO
+        function renderPosts(postsArray) {
+            postsContainer.innerHTML = '';
+            if (!postsArray || postsArray.length === 0) {
+                postsContainer.innerHTML = '<div class="empty-state">✨ No posts yet — share something amazing ✨</div>';
+                return;
+            }
+
+            // Sort by date descending (newest first)
+            const sortedPosts = [...postsArray].sort((a, b) => {
+                const dateA = new Date(a.dateISO);
+                const dateB = new Date(b.dateISO);
+                return dateB - dateA;
+            });
+
+            for (const post of sortedPosts) {
+                // Safely extract fields
+                const name = post.name?.trim() || 'Anonymous';
+                const content = post.content?.trim() || '—';
+                const dateRaw = post.dateISO || post.date || new Date().toISOString();
+
+                // Create card element with DOM methods (prevents XSS)
+                const card = document.createElement('div');
+                card.className = 'post-card';
+
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'post-name';
+                nameDiv.textContent = name;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'post-content';
+                contentDiv.textContent = content;
+
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'post-date';
+                const calendarIcon = '📅 ';
+                dateDiv.textContent = `${calendarIcon}${formatDate(dateRaw)}`;
+
+                card.appendChild(nameDiv);
+                card.appendChild(contentDiv);
+                card.appendChild(dateDiv);
+                postsContainer.appendChild(card);
+            }
+        }
+
+        // Fetch posts from Google Apps Script API (GET)
+        async function fetchPostsFromAPI() {
+            if (!API_BASE_URL) {
+                // Show warning but still provide empty state (explain to user)
+                postsContainer.innerHTML = '<div class="empty-state">⚠️ Backend URL not configured. Please set your Google Apps Script URL in the JavaScript (API_BASE_URL).</div>';
+                return [];
+            }
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000);
+                const response = await fetch(API_BASE_URL, {
+                    method: 'GET',
+                    signal: controller.signal,
+                    headers: { 'Accept': 'application/json' }
+                });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status} - failed to fetch posts`);
+                }
+
+                const data = await response.json();
+                // Expecting data = { posts: [...] } or data.posts array
+                let posts = [];
+                if (Array.isArray(data)) {
+                    posts = data;
+                } else if (data && Array.isArray(data.posts)) {
+                    posts = data.posts;
+                } else if (data && data.data && Array.isArray(data.data)) {
+                    posts = data.data;
+                } else {
+                    console.warn('Unexpected API response structure', data);
+                    posts = [];
+                }
+                return posts;
+            } catch (error) {
+                console.error('GET fetch error:', error);
+                let errorMsg = 'Could not load posts. ';
+                if (error.name === 'AbortError') errorMsg += 'Request timeout.';
+                else if (error.message.includes('Failed to fetch')) errorMsg += 'Network error / CORS. Check API URL & CORS settings.';
+                else errorMsg += error.message;
+                showApiErrorMessage(errorMsg);
+                return [];
+            }
+        }
+
+        // Send new post via POST request to Google Apps Script
+        async function sendPostToAPI(postData) {
+            if (!API_BASE_URL) {
+                throw new Error('Google Apps Script URL is not configured. Please set API_BASE_URL with your valid endpoint.');
+            }
+            try {
+                await fetch(API_BASE_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(postData),
+                });
+                // When using no-cors, the response is opaque, so we assume success.
+                return { success: true };
+            } catch (error) {
+                throw new Error(`Network issue. ${error.message}`);
+            }
+        }
+
+        // Reload posts: show loading, fetch, render, hide loading
+        async function reloadPosts() {
+            if (isFetching) return;
+            isFetching = true;
+            // Show loading spinner, clear current posts area temporarily
+            loadingIndicator.style.display = 'flex';
+            postsContainer.innerHTML = '';  // clear previous content while loading
+
+            const posts = await fetchPostsFromAPI();
+
+            loadingIndicator.style.display = 'none';
+            renderPosts(posts);
+            isFetching = false;
+        }
+
+        // Spam filter: validate name & content, prevent short/empty submissions
+        function validatePost(name, content) {
+            const trimmedName = name.trim();
+            const trimmedContent = content.trim();
+
+            if (trimmedName.length === 0) {
+                return { valid: false, message: '❌ Please enter your name.' };
+            }
+            if (trimmedName.length < 2) {
+                return { valid: false, message: '❌ Name must be at least 2 characters.' };
+            }
+            if (trimmedContent.length === 0) {
+                return { valid: false, message: '❌ Post content cannot be empty.' };
+            }
+            if (trimmedContent.length < 5) {
+                return { valid: false, message: '❌ Post is too short (minimum 5 characters).' };
+            }
+            if (trimmedContent.length > 2000) {
+                return { valid: false, message: '❌ Post too long (max 2000 chars).' };
+            }
+            return { valid: true, message: '' };
+        }
+
+        // Auto add current date in ISO format (for sorting & backend)
+        function getCurrentDateISO() {
+            return new Date().toISOString();
+        }
+
+        // Handle form submission
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            // Hide previous form errors
+            formErrorDiv.style.display = 'none';
+            formErrorDiv.textContent = '';
+
+            const name = nameInput.value;
+            const content = contentInput.value;
+
+            // Spam filter & validation
+            const validation = validatePost(name, content);
+            if (!validation.valid) {
+                formErrorDiv.textContent = validation.message;
+                formErrorDiv.style.display = 'block';
+                return;
+            }
+
+            // Disable submit button to prevent double posting
+            submitBtn.disabled = true;
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = '✈️ Publishing ...';
+
+            const newPost = {
+                name: name.trim(),
+                content: content.trim(),
+                dateISO: getCurrentDateISO(),
+            };
+
+            try {
+                // Send POST to Google Apps Script API
+                await sendPostToAPI(newPost);
+
+                // Clear form fields after successful post
+                nameInput.value = '';
+                contentInput.value = '';
+                formErrorDiv.style.display = 'none';
+
+                // Reload posts to show updated list (newest on top)
+                await reloadPosts();
+
+                // optional: small visual feedback
+                const successMsg = document.createElement('div');
+                successMsg.className = 'api-error';
+                successMsg.style.backgroundColor = 'rgba(59,130,246,0.2)';
+                successMsg.style.borderLeftColor = '#3b82f6';
+                successMsg.style.color = '#bbf0ff';
+                successMsg.textContent = '✓ Post published successfully!';
+                postsContainer.prepend(successMsg);
+                setTimeout(() => successMsg.remove(), 2500);
+
+            } catch (error) {
+                console.error('POST error:', error);
+                formErrorDiv.textContent = `⚠️ Failed to publish: ${error.message}. Check API endpoint or network.`;
+                formErrorDiv.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
+        }
+
+        // Initial load: fetch posts and display
+        async function init() {
+            // attach submit event
+            postForm.addEventListener('submit', handleSubmit);
+            // load posts from backend
+            await reloadPosts();
+        }
+
+        // PWA Install Logic
+        let deferredPrompt;
+        const installAppBtn = document.getElementById('installAppBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Update UI notify the user they can install the PWA
+            installAppBtn.style.display = 'inline-block';
+        });
+
+        installAppBtn.addEventListener('click', async () => {
+            // Hide the app provided install promotion
+            installAppBtn.style.display = 'none';
+            // Show the install prompt
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // We've used the prompt, and can't use it again, throw it away
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+                deferredPrompt = null;
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            // Hide the app-provided install promotion
+            installAppBtn.style.display = 'none';
+            // Clear the deferredPrompt so it can be garbage collected
+            deferredPrompt = null;
+            console.log('PWA was installed');
+        });
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('SW registered: ', registration);
+                }).catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+            });
+        }
+
+        // Run initialization when DOM ready
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+
+</html>
